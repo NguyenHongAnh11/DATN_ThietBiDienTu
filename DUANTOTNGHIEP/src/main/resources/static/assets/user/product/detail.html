@@ -1,0 +1,164 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic (~{::main})}">
+	<main ng-init="loadProductDetails(${item.id})" class="poly-item-detail container">
+		<section class="padding-large">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page" ng-bind="item.name">SP1</li>
+							</ol>
+						</nav>
+						<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<img ng-src="{{item.imageUrls[0]}}" class="d-block w-100" alt="Image 1">
+								</div>
+								<div class="carousel-item" ng-repeat="image in item.imageUrls.slice(1)">
+									<img ng-src="{{image}}" class="d-block w-100" alt="Image {{$index + 2}}">
+								</div>
+							</div>
+							<div class="carousel-indicators">
+								<button type="button" ng-repeat="image in item.imageUrls"
+									data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$index}}"
+									class="{{ $index === 0 ? 'active' : '' }}"
+									aria-current="{{$index === 0 ? 'true' : 'false'}}"
+									aria-label="Slide {{$index + 1}}">
+									<img ng-src="{{image}}" class="d-block w-100" alt="Thumbnail {{$index + 1}}">
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="product p-4">
+							<div class="mt-4 mb-3">
+								<span class="text-uppercase text-muted brand" ng-bind="item.category.name">PC
+									GAMING</span>
+								<h5 class="text-uppercase" ng-bind="item.name">PC GVN Intel i3-12100F/ VGA RX 6500XT
+								</h5>
+								<div class="price d-flex flex-row align-items-center">
+									<span class="act-price fs-2 text-danger" ng-bind="item.price">9.900.000 đ</span>
+									<div class="ml-2">
+										<small class="dis-price fs-6 text-decoration-line-through"
+											ng-bind="item.discountedPrice">15.000.000 đ</small>
+										<span ng-bind="item.discountPercentage + ' OFF'">40% OFF</span>
+									</div>
+								</div>
+							</div>
+							<p class="about" ng-bind="item.description">Description goes here.</p>
+
+							<div class="cart mt-4 align-items-center">
+								<button class="btn btn-danger text-uppercase mr-2 px-4"
+									ng-click="addToCart(item.id)">Add to cart</button>
+								<i class="fa fa-heart text-muted"></i>
+								<i class="fa fa-share-alt text-muted"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="bg-light border-top py-4">
+			<div class="container">
+				<div class="row gx-4">
+					<div class="col-lg-8 mb-4">
+						<div class="border rounded-2 px-3 py-2 bg-white">
+							<!-- Pills navs -->
+							<ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+								<li class="nav-item" role="presentation">
+									<a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="pill" href="#ex1-pills-1"
+										role="tab" aria-controls="ex1-pills-1" aria-selected="true">Thông Tin Sản
+										Phẩm</a>
+								</li>
+								<li class="nav-item" role="presentation">
+									<a class="nav-link" id="ex1-tab-2" data-mdb-toggle="pill" href="#ex1-pills-2"
+										role="tab" aria-controls="ex1-pills-2" aria-selected="false">Đánh Giá</a>
+								</li>
+							</ul>
+							<!-- Pills content -->
+							<div class="tab-content" id="ex1-content">
+								<div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel"
+									aria-labelledby="ex1-tab-1">
+									<p ng-bind="item.details">With supporting text below as a natural lead-in to
+										additional content...</p>
+									<div class="row mb-2">
+										<div class="col-12 col-md-6">
+											<ul class="list-unstyled mb-0">
+												<li ng-repeat="feature in item.features">
+													<i class="fas fa-check text-success me-2"></i>{{feature}}
+												</li>
+											</ul>
+										</div>
+										<div class="col-12 col-md-6 mb-0">
+											<ul class="list-unstyled">
+												<li><i class="fas fa-check text-success me-2"></i>Some other great
+													feature name here</li>
+												<li><i class="fas fa-check text-success me-2"></i>Modern style and
+													design</li>
+											</ul>
+										</div>
+									</div>
+									<table class="table border mt-3 mb-2">
+										<tr>
+											<th class="py-2">Display:</th>
+											<td class="py-2" ng-bind="item.display">13.3-inch LED-backlit display with
+												IPS</td>
+										</tr>
+										<tr>
+											<th class="py-2">Processor capacity:</th>
+											<td class="py-2" ng-bind="item.processor">2.3GHz dual-core Intel Core i5
+											</td>
+										</tr>
+										<tr>
+											<th class="py-2">Camera quality:</th>
+											<td class="py-2" ng-bind="item.camera">720p FaceTime HD camera</td>
+										</tr>
+										<tr>
+											<th class="py-2">Memory:</th>
+											<td class="py-2" ng-bind="item.memory">8 GB RAM or 16 GB RAM</td>
+										</tr>
+										<tr>
+											<th class="py-2">Graphics:</th>
+											<td class="py-2" ng-bind="item.graphics">Intel Iris Plus Graphics 640</td>
+										</tr>
+									</table>
+								</div>
+								<div class="tab-pane fade" id="ex1-pills-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+									<p>Tab content or sample information now...</p>
+								</div>
+							</div>
+							<!-- Pills content -->
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="px-0 border rounded-2 shadow-0">
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">Sản Phẩm Tương Tự</h5>
+									<div class="col-md-3" ng-repeat="p in item.category.products">
+										<div class="d-flex mb-3">
+											<a ng-href="/product/detail/{{p.id}}" class="me-3">
+												<img ng-src="https://placehold.co/610x610?text=Item1"
+													class="img-md img-thumbnail" style="min-width: 96px; height: 96px;"
+													alt="Similar Product">
+											</a>
+											<div class="info">
+												<a ng-href="/product/detail/{{p.id}}" class="nav-link mb-1"
+													ng-bind="p.name">Product Name</a>
+												<div class="price">
+													<span class="act-price" ng-bind="p.price">9.900.000 đ</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</div>

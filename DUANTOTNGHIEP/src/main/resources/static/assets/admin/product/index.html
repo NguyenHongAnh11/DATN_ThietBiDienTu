@@ -1,0 +1,16 @@
+<ul class="nav nav-tabs" style="font-variant: small-caps;">
+	<li class="nav-item">
+		<a class="nav-link" data-bs-toggle="tab" data-bs-target="#edit" href="">Product Edition</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link active" data-bs-toggle="tab" data-bs-target="#list" href="">List of Products</a>
+	</li>
+</ul>
+<div class="tab-content" xmlns:th="http://www.thymeleaf.org">
+	<div id="edit" class="tab-pane fade">
+		<div ng-include="'/assets/admin/product/_form.html'"></div>
+	</div>
+	<div id="list" class="tab-pane fade show active">
+		<div ng-include="'/assets/admin/product/_table.html'"></div>
+	</div>
+</div>

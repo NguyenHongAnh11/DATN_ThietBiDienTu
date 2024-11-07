@@ -1,0 +1,120 @@
+<div xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/index :: dynamic (~{::main})}">
+	<main>
+
+		<section class="padding-large">
+			<section class="">
+				<div class="container">
+					<div class="row">
+						<!-- sidebar -->
+						<div class="col-lg-3">
+							<div th:replace="~{/layout/_category}"></div>
+
+						</div>
+						<div class="col-lg-9">
+							<header
+								class="d-sm-flex align-items-center border-bottom mb-4 pb-3">
+								<strong class="d-block py-2">32 Items found </strong>
+								<div class="ms-auto">
+									<form action="/sort" method="get" class="d-flex">
+										<select name="sortBy" id="SortBy" class="form-select"
+											onchange="this.form.submit()">
+											<option value="title-ascending" selected="selected">Sort</option>
+											<option value="A-Z">A-Z</option>
+											<option value="Z-A">Z-A</option>
+											<option value="Giá, thấp đến cao">Giá, thấp đến cao</option>
+											<option value="Giá, cao đến thấp">Giá, cao đến thấp</option>
+										</select> <input class="collection-header__default-sort" type="hidden"
+											value="manual">
+									</form>
+								</div>
+							</header>
+							<div th:each="p: ${items}">
+								<div class="row justify-content-center mb-3">
+									<div class="col-md-12">
+										<div class="card shadow-0 border rounded-3">
+											<div class="card-body">
+												<div class="row g-0">
+													<div
+														class="col-xl-3 col-md-4 d-flex justify-content-center">
+														<div
+															class="bg-image hover-zoom ripple rounded ripple-surface me-md-3 mb-3 mb-md-0">
+															<img th:src="@{|/assets/images/${p.image}|}"
+																class="w-100" /> <a href="#!">
+																<div class="hover-overlay">
+																	<div class="mask"
+																		style="background-color: rgba(253, 253, 253, 0.15);">
+																	</div>
+																</div>
+															</a>
+														</div>
+													</div>
+													<div class="col-xl-6 col-md-6 col-sm-7">
+														<h5 th:text="${p.name}">Rucksack Backpack Jeans</h5>
+														<div class="d-flex flex-row">
+															<div class="text-warning mb-1 me-2">
+																<i class="bi bi-star-fill"></i> <span class="ms-1">
+																	4.5 </span>
+															</div>
+															<span class="text-muted">154 orders</span>
+														</div>
+
+														<p class="text mb-5 mb-md-0" th:text="${p.describe}">
+															Short description about the product goes here, for ex its
+															features. Lorem ipsum dolor sit amet with hapti you enter
+															into any new area of science, you almost lorem ipsum is
+															great text consectetur adipisicing</p>
+													</div>
+													<div class="col-xl-3 col-md-3 col-sm-5">
+														<div class="d-flex flex-row align-items-center mb-1">
+															<h4 class="mb-1 me-1"
+																th:text="${T(String).format('%,.0f', p.price)}"></h4>
+															<h4 class="mb-1 me-1"
+																th:text="VND"></h4>
+														</div>
+														<h6 class="text-success">Free shipping</h6>
+														<div class="mt-4">
+															<button class="btn btn-primary shadow-0" type="button"
+																th:replace="~{/product/_actions::item_id(${p.id})}">Add
+																card</button>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+							<hr />
+
+							<nav aria-label="Page navigation example"
+								class="d-flex justify-content-center mt-3">
+								<ul class="pagination">
+									<li class="page-item disabled"><a class="page-link"
+										href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+									</a></li>
+									<li class="page-item active"><a class="page-link" href="#">1</a></li>
+									<li class="page-item"><a class="page-link" href="#">2</a></li>
+									<li class="page-item"><a class="page-link" href="#">3</a></li>
+									<li class="page-item"><a class="page-link" href="#">4</a></li>
+									<li class="page-item"><a class="page-link" href="#">5</a></li>
+									<li class="page-item"><a class="page-link" href="#"
+										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+									</a></li>
+								</ul>
+							</nav>
+							<!-- Pagination -->
+						</div>
+					</div>
+				</div>
+			</section>
+		</section>
+	</main>
+</div>
+
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">

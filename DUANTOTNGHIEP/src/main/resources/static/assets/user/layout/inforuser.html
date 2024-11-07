@@ -1,0 +1,26 @@
+<div xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/userindex :: dynamic (~{::main})}">
+	<main>
+		<form action="${url}/index" method="post">
+			<div class="form-group">
+				<label for="id">Username:</label> <input type="text"
+					class="form-control" id="id" name="id"
+					value="{{$auth.user.username}}" readonly>
+			</div>
+			<div class="form-group">
+				<label for="fullname">Full Name:</label> <input type="text"
+					class="form-control" id="fullname" name="fullname"
+					value="{{$auth.user.fullname}}" required>
+			</div>
+			<div class="form-group">
+				<label for="email">Email:</label> <input type="email"
+					class="form-control" id="email" name="email"
+					value="{{$auth.user.email}}" required>
+			</div>
+			<hr>
+			<button type="submit" class="btn btn-primary"
+				formaction="${url}/edit-profile">Update</button>
+		</form>
+	</main>
+
+</div>

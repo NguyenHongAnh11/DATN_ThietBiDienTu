@@ -1,0 +1,50 @@
+<div class="container" ng-controller="order-ctrl">
+	<div class="row" ng-if="orders">
+		<div ng-repeat="order in orderPager.orders"
+			class="col-12 col-md-6 mb-3">
+			<div class="card">
+				<div class="card-header">Order #{{order.id}}</div>
+				<div class="card-body">
+					<p class="card-text">Date: {{order.createDate | date :
+						'dd-MM-yyyy'}}</p>
+						<p class="card-text">Name: {{order.account.fullname | date :
+						'dd-MM-yyyy'}}</p>
+					<p class="card-text">Address: {{order.address}}</p>
+					<div ng-if="order.details">
+						<h5>Order Details:</h5>
+						<ul class="list-group">
+							<li class="list-group-item" ng-repeat="detail in order.details">
+								Product: {{detail.product.name}}<br> Quantity:
+								{{detail.quantity}}<br> Price: {{detail.price | currency}}
+							</li>
+						</ul>
+					</div>
+					<div class="btn-group btn-group-sm" role="group">
+						<button ng-click="viewOrder(order)" class="btn btn-info">
+							<i class="bi bi-eye"></i> View
+						</button>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="text-center mt-3">
+		<button ng-click="orderPager.first()" class="btn btn-danger">
+			<<
+		</button>
+		<button ng-click="orderPager.prev()" class="btn btn-primary">
+			<
+		</button>
+		<button class="btn btn-success">{{orderPager.page + 1}} of
+			{{orderPager.count}}</button>
+		<button ng-click="orderPager.next()" class="btn btn-primary">
+			>
+		</button>
+		<button ng-click="orderPager.last()" class="btn btn-danger">
+			>>
+		</button>
+	</div>
+
+</div>

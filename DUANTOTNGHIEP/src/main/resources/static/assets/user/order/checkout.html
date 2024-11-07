@@ -1,0 +1,158 @@
+<div xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic (~{::main})}">
+	<main>
+		<section class="py-5">
+			<div class="container py-5">
+				<div class="row">
+					<div class="col-xl-8 col-lg-8 mb-4">
+						<div class="card shadow-0 border">
+							<div class="p-4">
+								<h5 class="card-title mb-3">Thông Tin Người Nhận</h5>
+								<div class="row">
+									<div class="col-6 mb-3">
+										<p class="mb-0">Họ</p>
+										<div class="form-outline">
+											<input type="text" id="typeText" placeholder="Type here"
+												class="form-control" />
+										</div>
+									</div>
+
+									<div class="col-6">
+										<p class="mb-0">Tên</p>
+										<div class="form-outline">
+											<input type="text" id="typeText" placeholder="Type here"
+												class="form-control" />
+										</div>
+									</div>
+
+									<div class="col-6 mb-3">
+										<p class="mb-0">Số điện thoại</p>
+										<div class="form-outline">
+											<input type="tel" id="typePhone" value="+84 " class="form-control" />
+										</div>
+									</div>
+
+									<div class="col-6 mb-3">
+										<p class="mb-0">Email</p>
+										<div class="form-outline">
+											<input type="email" id="typeEmail" value="{{$auth.user.email}}"
+												placeholder="example@gmail.com" class="form-control" />
+										</div>
+									</div>
+								</div>
+
+								
+
+								<hr class="my-4" />
+
+								<h5 class="card-title mb-3">Thông Tin Vận Chuyển</h5>
+
+
+								<div class="row">
+									<div class="col-sm-8 mb-3">
+										<p class="mb-0">Địa Chỉ</p>
+										<div class="form-outline">
+											<input type="text" id="typeText" ng-model="order.address.detail" placeholder="Type here"
+												class="form-control" />
+										</div>
+									</div>
+
+									<div class="col-sm-4 mb-3">
+										<p class="mb-0">Tỉnh/Thành Phố</p>
+										<select class="form-select" ng-model="selectedProvinceId"
+											ng-change="loadDistricts(selectedProvinceId)">
+											<option ng-repeat="province in provinces" value="{{province.id}}">
+												{{province.name}}
+											</option>
+										</select>
+									</div>
+
+									<div class="col-sm-6 mb-3">
+										<p class="mb-0">Huyện/Quận</p>
+										<select class="form-select" ng-model="selectedDistrict"
+											ng-change="loadwards(selectedDistrict)">
+											<option ng-repeat="district in districts" value="{{district.id}}">
+												{{district.name}}
+											</option>
+										</select>
+									</div>
+									<div class="col-sm-6 mb-3">
+										<p class="mb-0">Xã/Phường</p>
+										<select class="form-select" ng-model="selectedwards">
+											<option ng-repeat="ward in wards" value="{{wards.id}}">
+												{{ward.name}}
+											</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-check mb-3">
+									<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
+									<label class="form-check-label" for="flexCheckDefault1">Lưu lại thông tin</label>
+								</div>
+
+						
+
+								<div class="float-end">
+									<button class="btn btn-light border">Cancel</button>
+									<button class="btn btn-success shadow-0 border " ng-click="order.purchase()">Continue</button>
+								</div>
+							</div>
+						</div>
+						<!-- Checkout -->
+					</div>
+					<div class="col-xl-4 col-lg-4 d-flex justify-content-center justify-content-lg-end">
+						<div class="ms-lg-4 mt-4 mt-lg-0" style="max-width: 320px;">
+							<h6 class="mb-3">Summary</h6>
+							<div class="d-flex justify-content-between">
+								<p class="mb-2">Total price:</p>
+								<p class="mb-2">${{cart.amount}}</p>
+							</div>
+							<div class="d-flex justify-content-between">
+								<p class="mb-2">Discount:</p>
+								<p class="mb-2 text-danger">0</p>
+							</div>
+							<div class="d-flex justify-content-between">
+								<p class="mb-2">Shipping cost:</p>
+								<p class="mb-2">0</p>
+							</div>
+							<hr />
+							<div class="d-flex justify-content-between">
+								<p class="mb-2">Total price:</p>
+								<p class="mb-2 fw-bold">${{cart.amount}}</p>
+							</div>
+
+							<div class="input-group mt-3 mb-4">
+								<input type="text" class="form-control border" name="" placeholder="Promo code" />
+								<button class="btn btn-light text-primary border">Apply</button>
+							</div>
+
+							<hr />
+							<h6 class="text-dark my-4">Items in cart</h6>
+							<div ng-repeat="item in cart.items">
+
+								<div class="d-flex align-items-center mb-4">
+									<div class="me-3 position-relative">
+										<span
+											class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary">
+											1
+										</span>
+										<img ng:src="@{|/assets/images/${item.image}|}"
+											style="height: 96px; width: 96x;" class="img-sm rounded border" />
+									</div>
+									<div class="">
+										<a href="#" class="nav-link">
+											{{item.name}}
+										</a>
+										<div class="price text-muted">Total: ${{cart.amt_of(item) | number : 2}}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+	</main>
+</div>
