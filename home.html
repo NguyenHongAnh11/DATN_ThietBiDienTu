@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+</head>
+
+<body>
+	<div xmlns:th="http://www.thymeleaf.org"
+		th:replace="~{/layout/index :: dynamic (~{::main})}">
+		<main>
+			<section id="billboard"
+				class="position-relative overflow-hidden bg-light-blue">
+				<div class="swiper main-swiper">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="container">
+								<div class="row d-flex align-items-center">
+									<div class="col-md-6">
+										<div class="banner-content">
+											<h1 class="display-2 text-uppercase text-dark pb-5">Your
+												Products Are Great.</h1>
+											<a href="shop.html"
+												class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop
+												Product</a>
+										</div>
+									</div>
+									<div class="col-md-5">
+										<div class="image-holder">
+											<img src="https://placehold.co/657x677" alt="banner">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="container">
+								<div class="row d-flex flex-wrap align-items-center">
+									<div class="col-md-6">
+										<div class="banner-content">
+											<h1 class="display-2 text-uppercase text-dark pb-5">Technology
+												Hack You Won't Get</h1>
+											<a href="shop.html"
+												class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Shop
+												Product</a>
+										</div>
+									</div>
+									<div class="col-md-5">
+										<div class="image-holder">
+											<img src="https://placehold.co/657x677" alt="banner">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-icon swiper-arrow  swiper-arrow-prev">
+					<svg class="chevron-left" width="24" height="24">
+						<use xlink:href="#chevron-left" />
+					</svg>
+				</div>
+				<div class="swiper-icon swiper-arrow swiper-arrow-next">
+					<svg class="chevron-right" width="24" height="24">
+						<use xlink:href="#chevron-right" />
+					</svg>
+				</div>
+			</section>
+			<section id="company-services" class="padding-large">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-3 col-md-6 pb-3">
+							<div class="icon-box d-flex">
+								<div class="icon-box-icon pe-3 pb-3">
+									<svg class="cart-outline">
+										<use xlink:href="#cart-outline" />
+									</svg>
+								</div>
+								<div class="icon-box-content">
+									<h3 class="card-title text-uppercase text-dark">Giao hàng
+										miễn phí</h3>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 pb-3">
+							<div class="icon-box d-flex">
+								<div class="icon-box-icon pe-3 pb-3">
+									<svg class="quality">
+										<use xlink:href="#quality" />
+									</svg>
+								</div>
+								<div class="icon-box-content">
+									<h3 class="card-title text-uppercase text-dark">Đảm bảo
+										chất lượng</h3>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 pb-3">
+							<div class="icon-box d-flex">
+								<div class="icon-box-icon pe-3 pb-3">
+									<svg class="price-tag">
+										<use xlink:href="#price-tag" />
+									</svg>
+								</div>
+								<div class="icon-box-content">
+									<h3 class="card-title text-uppercase text-dark">Ưu đãi
+										hàng ngày</h3>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 pb-3">
+							<div class="icon-box d-flex">
+								<div class="icon-box-icon pe-3 pb-3">
+									<svg class="shield-plus">
+										<use xlink:href="#shield-plus" />
+									</svg>
+								</div>
+								<div class="icon-box-content">
+									<h3 class="card-title text-uppercase text-dark">Thanh toán
+										an toàn 100%</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section id="mobile-products"
+				class="product-store position-relative padding-large no-padding-top">
+				<div class="container">
+					<div class="row">
+						<div class="display-header d-flex justify-content-between pb-3">
+							<h2 class="display-7 text-dark text-uppercase">Các sản phẩm
+								hot</h2>
+							<div class="btn-right">
+								<a href="shop.html"
+									class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+							</div>
+						</div>
+						<div class="swiper product-swiper">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide" th:each="p: ${sales}">
+									<div class="product-card position-relative">
+										<div class="image-holder">
+											<img th:src="@{|/assets/images/${p.image}|}" class="w-100">
+										</div>
+										<div class="cart-concern position-absolute">
+											<div class="cart-button d-flex">
+												<a th:if="${p.quantity > 0}"
+													th:replace="~{/product/_actions::item_id(${p.id})}"
+													class="btn btn-medium btn-black"> Add to Cart <svg
+														class="cart-outline">
+            <use xlink:href="#cart-outline"></use>
+        </svg>
+												</a> <a th:if="${p.quantity == 0}" href="#"
+													class="btn btn-medium btn-black"> Contact </a>
+											</div>
+
+										</div>
+										<div
+											class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+											<h3 class="card-title text-uppercase">
+												<a th:href="@{/product/detail/{id}(id=${p.id})}"
+													th:text="${#strings.abbreviate(p.name, 20)}"></a>
+											</h3>
+
+											<span class="item-price text-primary"
+												th:text="${T(String).format('%,.0f', p.price)}"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-pagination position-absolute text-center"></div>
+			</section>
+			<section id="mobile-products"
+				class="product-store position-relative padding-large no-padding-top">
+				<div class="container">
+					<div class="row">
+						<div class="display-header d-flex justify-content-between pb-3">
+							<h2 class="display-7 text-dark text-uppercase">Các sản phẩm
+								đang có mã giảm</h2>
+							<div class="btn-right">
+								<a href="shop.html"
+									class="btn btn-medium btn-normal text-uppercase">Go to Shop</a>
+							</div>
+						</div>
+						<div class="swiper product-swiper">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide" th:each="hi: ${hotitems}">
+									<div class="product-card position-relative">
+										<div class="image-holder">
+											<img th:src="@{|/assets/images/${hi.image}|}" class="w-100">
+										</div>
+										<div class="cart-concern position-absolute">
+											<div class="cart-button d-flex">
+												<a th:if="${hi.quantity > 0}"
+													th:replace="~{/product/_actions::item_id(${hi.id})}"
+													class="btn btn-medium btn-black"> Add to Cart <svg
+														class="cart-outline">
+            <use xlink:href="#cart-outline"></use>
+        </svg>
+												</a> <a th:if="${hi.quantity == 0}" href="#"
+													class="btn btn-medium btn-black"> Contact </a>
+											</div>
+										</div>
+										<div
+											class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+											<h3 class="card-title text-uppercase">
+												<a th:href="@{/product/detail/{id}(id=${hi.id})}"
+													th:text="${#strings.abbreviate(hi.name, 20)}"></a>
+											</h3>
+
+											<span class="item-price text-primary"
+												th:text="${T(String).format('%,.0f', hi.price)}"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-pagination position-absolute text-center"></div>
+			</section>
+		</main>
+	</div>
+</body>
+
+</html>
